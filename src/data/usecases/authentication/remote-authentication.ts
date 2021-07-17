@@ -1,4 +1,5 @@
-import { HttpPostClient } from 'data/protocols/http/http-post-client'
+import { HttpPostClient } from '@/data/protocols/http/http-post-client'
+import { AuthenticationParams } from '@/domains/usecases/authentication'
 
 export class RemoteAuthentication {
   // recebe a url e o client(axios/fetch/outros)
@@ -6,7 +7,7 @@ export class RemoteAuthentication {
     private readonly url: string,
     private readonly httpPostClient: HttpPostClient) { }
 
-  async auth (): Promise<void> {
-    await this.httpPostClient.post({ url: this.url })
+  async auth (params: AuthenticationParams): Promise<void> {
+    await this.httpPostClient.post({ url: this.url, body: params })
   }
 }
