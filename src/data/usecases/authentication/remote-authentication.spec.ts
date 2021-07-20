@@ -1,12 +1,11 @@
 import faker from 'faker'
-import { mockAccountModel, mockAuthentication } from '@/domains/test/mock-account'
-import { HttpPostClientSpy } from '@/data/test/mock-http-client'
+import { mockAccountModel, mockAuthentication } from '@/domains/test'
+import { HttpPostClientSpy } from '@/data/test'
 import { RemoteAuthentication } from './remote-authentication'
-import { InvalidCredentialsError } from '@/domains/errors/invalid-credentials-error'
-import { HttpsStatusCode } from '@/data/protocols/http/http-response'
-import { UnexpectedError } from '@/domains/errors/unexpected-error'
-import { AuthenticationParams } from '@/domains/usecases/authentication'
-import { AccountModel } from '@/domains/models/account-model'
+import { InvalidCredentialsError, UnexpectedError } from '@/domains/errors'
+import { HttpsStatusCode } from '@/data/protocols/http'
+import { AuthenticationParams } from '@/domains/usecases'
+import { AccountModel } from '@/domains/models'
 
 type SutTypes = {
   sut: RemoteAuthentication

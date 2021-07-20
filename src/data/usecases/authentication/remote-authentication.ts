@@ -1,9 +1,7 @@
-import { HttpPostClient } from '@/data/protocols/http/http-post-client'
-import { HttpsStatusCode } from '@/data/protocols/http/http-response'
-import { InvalidCredentialsError } from '@/domains/errors/invalid-credentials-error'
-import { UnexpectedError } from '@/domains/errors/unexpected-error'
-import { AccountModel } from '@/domains/models/account-model'
-import { Authentication, AuthenticationParams } from '@/domains/usecases/authentication'
+import { HttpPostClient, HttpsStatusCode } from '@/data/protocols/http'
+import { InvalidCredentialsError, UnexpectedError } from '@/domains/errors'
+import { AccountModel } from '@/domains/models'
+import { Authentication, AuthenticationParams } from '@/domains/usecases'
 
 export class RemoteAuthentication implements Authentication {
   // recebe a url e o client(axios/fetch/outros)

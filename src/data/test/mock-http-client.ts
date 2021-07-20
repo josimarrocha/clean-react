@@ -1,5 +1,4 @@
-import { HttpPostClient, HttpPostParams } from '@/data/protocols/http/http-post-client'
-import { HttpResponse, HttpsStatusCode } from '@/data/protocols/http/http-response'
+import { HttpPostClient, HttpPostParams, HttpResponse, HttpsStatusCode } from '@/data/protocols/http'
 
 // simulate axios/fetch/outros (httpClient)
 export class HttpPostClientSpy<T, R> implements HttpPostClient <T, R> {
