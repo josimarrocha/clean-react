@@ -13,7 +13,7 @@ export class RemoteAuthentication implements Authentication {
     const httpResponse = await this.httpPostClient.post({ url: this.url, body: params })
     switch (httpResponse.statusCode) {
       case HttpsStatusCode.success: return httpResponse.body
-      case HttpsStatusCode.unathorized: throw new InvalidCredentialsError()
+      case HttpsStatusCode.unauthorized: throw new InvalidCredentialsError()
 
       default: throw new UnexpectedError()
     }
