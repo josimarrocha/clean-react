@@ -11,10 +11,11 @@
     "allowJs": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
     "resolveJsonModule": true,
     // "isolatedModules": true,
+    "noImplicitAny": false,
     "noEmit": true,
     "paths": {
       "@/*": ["./*"],
