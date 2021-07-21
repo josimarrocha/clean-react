@@ -21,6 +21,6 @@ describe('AxionsHttpClient', () => {
     const request = mockPostRequest()
     const sut = makeSut()
     await sut.post(request)
-    expect(mockAxions.post).toHaveBeenCalledWith(request.url)
+    expect(mockAxions.post).toHaveBeenCalledWith(request.url, request.body)
   })
 })
