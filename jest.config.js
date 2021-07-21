@@ -5,8 +5,8 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/src/$1'
   },
   coverageDirectory: 'coverage',
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   transform: {
-    '.+\\.ts$': 'ts-jest'
+    '.+\\.(ts|tsx)$': 'ts-jest'
   }
 }
