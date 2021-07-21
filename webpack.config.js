@@ -16,10 +16,30 @@ module.exports = {
 
   // extenções que serão suportadas
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.scss'],
     alias: {
       '@': path.join(__dirname, 'src')
     }
+  },
+  module: {
+    rules: [{
+      test: /\.ts(x?)$/,
+      loader: 'ts-loader',
+      exclude: /node_modules/
+    }, {
+      test: /\.scss$/,
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader',
+        options: {
+          // entender as classes do css pelo react
+          modules: true
+        }
+      }, {
+        loader: 'sass-loader'
+      }]
+    }]
   },
   devServer: {
     // file que o server irá servir
@@ -28,7 +48,7 @@ module.exports = {
     // constroi os arquivos no disco (false cria os arquivos em memória)
     writeToDisk: true,
 
-    // 
+    //
     historyApiFallback: true
   },
 
