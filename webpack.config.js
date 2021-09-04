@@ -5,7 +5,7 @@ module.exports = {
   mode: 'development',
 
   // qual o primeiro script que será executado no projeto
-  entry: './src/main/index.tsx',
+  entry: './src/main/main.tsx',
 
   // aonde a gente vai gerar o bundle
   output: {
@@ -39,6 +39,17 @@ module.exports = {
       }, {
         loader: 'sass-loader'
       }]
+    }, {
+      test: /\.(png|svg|jpg|jpeg|gif)$/i,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: './images/'
+          }
+        }
+      ]
     }]
   },
   devServer: {
