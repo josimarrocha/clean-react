@@ -62,28 +62,6 @@ button {
       font-size: 20px;
     }
 
-    .inputWrap {
-      margin-top: 16px;
-      width: 100%;
-      display: flex;
-      position: relative;
-      align-items: center;
-
-      input {
-        width: 100%;
-      }
-
-      .status {
-        width: 12px;
-        height: 12px;
-        background: firebrick;
-        border-radius: 50%;
-        position: absolute;
-        right: 8px;
-        cursor: help;
-      }
-    }
-
     .submit {
       margin-top: 32px;
     }
