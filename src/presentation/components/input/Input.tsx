@@ -5,7 +5,8 @@ type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>
 
 const Input: FC<Props> = (props: Props) => (
   <div className={Styles.inputWrap}>
-    <input {...props}/>
+    <input {...props} hidden />
+    <input {...props} />
     <span className={Styles.status}></span>
   </div>
 )
