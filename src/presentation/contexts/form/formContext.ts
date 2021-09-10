@@ -1,17 +1,16 @@
-import { createContext } from 'react'
+import { createContext, SetStateAction } from 'react'
 
 export type StateForm = {
   state: {
     isLoading?: boolean
+    errorMessage?: string
+    emailError?: string
+    passwordError?: string
   }
-  errorState: {
-    email?: string
-    password?: string
-    main?: string
-  }
+  setState?: SetStateAction<any>
 }
 
 export const Context = createContext<StateForm>({
-  errorState: {},
-  state: {}
+  state: {},
+  setState: {}
 })
