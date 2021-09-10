@@ -1,7 +1,17 @@
 import { createContext } from 'react'
-import { StateProps } from '@/presentation/pages/login/login'
 
-export const Context = createContext<StateProps>({
-  isLoading: false,
-  errorMessage: ''
+export type StateForm = {
+  state: {
+    isLoading?: boolean
+  }
+  errorState: {
+    email?: string
+    password?: string
+    main?: string
+  }
+}
+
+export const Context = createContext<StateForm>({
+  errorState: {},
+  state: {}
 })

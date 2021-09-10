@@ -13,11 +13,14 @@
 
   .status {
     width: 12px;
-    height: 12px;
-    background: firebrick;
+    height: 12px;    
     border-radius: 50%;
     position: absolute;
     right: 8px;
     cursor: help;
+
+    &.error{
+      background: firebrick;
+    }
   }
 }
