@@ -8,7 +8,11 @@ const Input: FC<Props> = (props: Props) => {
   const { state, setState } = useContext(Context)
 
   const getTitle = (): string => {
-    return state[`${props.name}Error`]
+    return state[`${props.name}Error`] || 'Tudo certo'
+  }
+
+  const getCurrentStatus = (): string => {
+    return state[`${props.name}Error`] ? Styles.error : Styles.success
   }
 
   const handleChange = (event: FocusEvent<HTMLInputElement>): void => {
@@ -22,7 +26,10 @@ const Input: FC<Props> = (props: Props) => {
     <div className={Styles.inputWrap}>
       <input {...props} hidden />
       <input data-testid={props.name} {...props} onChange={handleChange} />
-      <span title={getTitle()} data-testid={`${props.name}-status`} className={[Styles.status, Styles.error].join(' ')}></span>
+      <span
+        title={getTitle()}
+        data-testid={`${props.name}-status`}
+        className={[Styles.status, getCurrentStatus()].join(' ')} />
     </div>
   )
 }
