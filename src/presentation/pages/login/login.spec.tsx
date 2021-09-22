@@ -45,7 +45,7 @@ const populatePasswordField = (sut: RenderResult, password: string = faker.inter
   fireEvent.change(passwordInput, { target: { value: password } })
 }
 
-const simulateValidSubmit = async (
+const simulateValidSubmit = async(
   sut: RenderResult,
   email: string = faker.internet.email(),
   password: string = faker.internet.password()
@@ -129,13 +129,13 @@ describe('Login component', () => {
     testButtonisDisabled(sut, 'submit', false)
   })
 
-  test('Should show spinner on submit', async () => {
+  test('Should show spinner on submit', async() => {
     const { sut } = makeSut()
     await simulateValidSubmit(sut)
     testElementExists(sut, 'spinner')
   })
 
-  test('Should call Authentication with corret values', async () => {
+  test('Should call Authentication with corret values', async() => {
     const { sut, authenticationSpy } = makeSut()
     const email = faker.internet.email()
     const password = faker.internet.password()
@@ -143,7 +143,7 @@ describe('Login component', () => {
     expect(authenticationSpy.params).toEqual({ email, password })
   })
 
-  test('Should call Authentication only once', async () => {
+  test('Should call Authentication only once', async() => {
     const { sut, authenticationSpy } = makeSut()
     await simulateValidSubmit(sut)
     await simulateValidSubmit(sut)
@@ -157,7 +157,7 @@ describe('Login component', () => {
     expect(authenticationSpy.callsCont).toBe(0)
   })
 
-  test('Should present error if Authentication fails', async () => {
+  test('Should present error if Authentication fails', async() => {
     const { sut, authenticationSpy } = makeSut()
     const error = new InvalidCredentialsError()
     jest.spyOn(authenticationSpy, 'auth').mockReturnValueOnce(Promise.reject(error))
@@ -167,7 +167,7 @@ describe('Login component', () => {
     testErrorWrapChildCount(sut, 1)
   })
 
-  test('Should add accessToken to localStorage on success', async () => {
+  test('Should add accessToken to localStorage on success', async() => {
     const { sut, authenticationSpy } = makeSut()
     await simulateValidSubmit(sut)
     expect(localStorage.setItem).toHaveBeenCalledWith('accessToken', authenticationSpy.account.accessToken)
@@ -175,7 +175,7 @@ describe('Login component', () => {
     expect(history.location.pathname).toBe('/')
   })
 
-  test('Should go to signup page', async () => {
+  test('Should go to signup page', async() => {
     const { sut } = makeSut()
     const signup = sut.getByTestId('signup')
     fireEvent.click(signup)

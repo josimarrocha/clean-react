@@ -7,7 +7,7 @@ export class AuthenticationSpy implements Authentication {
   params: AuthenticationParams
   callsCont = 0
 
-  async auth (params: AuthenticationParams): Promise<AccountModel> {
+  async auth(params: AuthenticationParams): Promise<AccountModel> {
     this.params = params
     this.callsCont++
     return await Promise.resolve(this.account)

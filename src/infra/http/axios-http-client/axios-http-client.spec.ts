@@ -23,14 +23,14 @@ describe('AxionsHttpClient', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
-  test('Should call axios with correct URL and verb', async () => {
+  test('Should call axios with correct URL and verb', async() => {
     const request = mockPostRequest()
     const { sut, mockedAxios } = makeSut()
     await sut.post(request)
     expect(mockedAxios.post).toHaveBeenCalledWith(request.url, request.body)
   })
 
-  test('Should return the correct statusCode and body', async () => {
+  test('Should return the correct statusCode and body', async() => {
     const { sut, mockedAxios } = makeSut()
     const promise = sut.post(mockPostRequest())
     await expect(promise).toEqual(mockedAxios.post.mock.results[0].value)

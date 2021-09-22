@@ -31,7 +31,7 @@ const Login: FC<Props> = ({ validation, authentication }: Props) => {
     })
   }, [state.email, state.password])
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async(event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     if (state.isLoading || state.emailError || state.passwordError) return
     try {
