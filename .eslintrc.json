@@ -10,10 +10,10 @@
   },
   "plugins": ["react"],
   "rules": {
-    "space-before-function-paren": ["error", "never"],
+    "space-before-function-paren": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/space-before-function-paren": ["error", "never"],   
+    "@typescript-eslint/space-before-function-paren": "off",   
     "@typescript-eslint/restrict-template-expressions": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error"
