@@ -3,15 +3,16 @@ import Styles from './login-styles.scss'
 import { LoginHeader, Footer, FormStatus, Input } from '@/presentation/components'
 import { Context } from '@/presentation/contexts/form/formContext'
 import { Validation } from '@/presentation/protocols/validation'
-import { Authentication } from '@/domains/usecases'
+import { Authentication, SaveAccessToken } from '@/domains/usecases'
 import { Link, useHistory } from 'react-router-dom'
 
 type Props = {
   validation: Validation
   authentication: Authentication
+  saveAccessToken: SaveAccessToken
 }
 
-const Login: FC<Props> = ({ validation, authentication }: Props) => {
+const Login: FC<Props> = ({ validation, authentication, saveAccessToken }: Props) => {
   const history = useHistory()
   const [state, setState] = useState({
     isLoading: false,
@@ -31,7 +32,7 @@ const Login: FC<Props> = ({ validation, authentication }: Props) => {
     })
   }, [state.email, state.password])
 
-  const handleSubmit = async(event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     if (state.isLoading || state.emailError || state.passwordError) return
     try {
@@ -40,7 +41,7 @@ const Login: FC<Props> = ({ validation, authentication }: Props) => {
         email: state.email,
         password: state.password
       })
-      localStorage.setItem('accessToken', account.accessToken)
+      await saveAccessToken.save(account.accessToken)
       history.replace('/')
     } catch (error) {
       setState({
