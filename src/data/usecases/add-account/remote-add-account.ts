@@ -9,7 +9,7 @@ export class RemoteAddAccount implements AddAccount {
     private readonly httpPostClient: HttpPostClient<AddAccountParams, AccountModel>) { }
 
   async add(params: AddAccountParams): Promise<AccountModel> {
-    await this.httpPostClient.post({ url: this.url })
+    await this.httpPostClient.post({ url: this.url, body: params })
     return await Promise.resolve({ accessToken: 'pass' })
   }
 }
