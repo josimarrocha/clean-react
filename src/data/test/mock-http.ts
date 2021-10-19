@@ -1,3 +1,4 @@
+import faker from 'faker'
 import { HttpPostClient, HttpPostParams, HttpResponse, HttpsStatusCode } from '@/data/protocols/http'
 
 // simulate axios/fetch/outros (httpClient)
@@ -14,3 +15,8 @@ export class HttpPostClientSpy<T, R> implements HttpPostClient<T, R> {
     return this.response
   }
 }
+
+export const mockPostRequest = (): HttpPostParams<any> => ({
+  url: faker.internet.url(),
+  body: faker.random.objectElement()
+})
