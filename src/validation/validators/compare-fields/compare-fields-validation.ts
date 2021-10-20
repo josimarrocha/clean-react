@@ -10,6 +10,6 @@ export class CompareFieldsValidation implements FieldValidation {
   filed: string
 
   validate(value: string): Error | null {
-    return new InvalidFieldError()
+    return value === this.valueToCompare ? null : new InvalidFieldError()
   }
 }
