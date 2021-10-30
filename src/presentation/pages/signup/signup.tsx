@@ -25,9 +25,10 @@ const Signup: FC<Props> = ({ validation }) => {
   useEffect(() => {
     setState({
       ...state,
-      nameError: validation.validate('name', state.name)
+      nameError: validation.validate('name', state.name),
+      emailError: validation.validate('email', state.email)
     })
-  }, [state.name])
+  }, [state.name, state.email])
 
   const isDisabledButtom = (): boolean => !state.nameError && !state.emailError && !state.passwordConfimationError && !state.passwordError
 
