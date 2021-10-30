@@ -1,7 +1,8 @@
 import React from 'react'
+import faker from 'faker'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
-import { render, RenderResult, cleanup } from '@testing-library/react'
+import { render, RenderResult, cleanup, fireEvent } from '@testing-library/react'
 import { Signup } from '@/presentation/pages'
 import { ValidationStub } from '@/presentation/test'
 
@@ -20,12 +21,17 @@ const makeSut = (params?: SutParams): SutTypes => {
   validationStub.errorMessage = params?.validationError
   const sut = render(
     <Router history={history}>
-      <Signup />
+      <Signup validation={validationStub} />
     </Router>
   )
   return {
     sut
   }
+}
+
+const populateNameField = (sut: RenderResult, name: string = faker.internet.email()): void => {
+  const emailInput = sut.getByTestId('name')
+  fireEvent.change(emailInput, { target: { value: name } })
 }
 
 const testStatusForField = (sut: RenderResult, fieldName: string, validationError?: string): void => {
@@ -57,5 +63,12 @@ describe('Signup component', () => {
     testStatusForField(sut, 'email')
     testStatusForField(sut, 'password')
     testStatusForField(sut, 'passwordConfimation')
+  })
+
+  test('Should show name error if Validation fails', () => {
+    const validationError = faker.random.words()
+    const { sut } = makeSut({ validationError })
+    populateNameField(sut)
+    testStatusForField(sut, 'name', validationError)
   })
 })
