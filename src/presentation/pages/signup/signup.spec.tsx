@@ -5,6 +5,7 @@ import { createMemoryHistory } from 'history'
 import { render, RenderResult, cleanup, fireEvent, waitFor } from '@testing-library/react'
 import { Signup } from '@/presentation/pages'
 import { ValidationStub, Helper, AddAccountSpy } from '@/presentation/test'
+import { EmailInUseError } from '@/domains/errors'
 
 type SutTypes = {
   sut: RenderResult
@@ -151,5 +152,15 @@ describe('Signup component', () => {
     const { sut, addAccountSpy } = makeSut({ validationError })
     fireEvent.submit(sut.getByTestId('form'))
     expect(addAccountSpy.callsCont).toBe(0)
+  })
+
+  test('Should present error if Authentication fails', async () => {
+    const { sut, addAccountSpy } = makeSut()
+    const error = new EmailInUseError()
+    jest.spyOn(addAccountSpy, 'add').mockRejectedValueOnce(error)
+    await simulateValidSubmit(sut)
+    const mainError = sut.getByTestId('main-error')
+    expect(mainError.textContent).toBe(error.message)
+    Helper.testChildCount(sut, 'error-wrap', 1)
   })
 })
