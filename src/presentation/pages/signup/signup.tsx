@@ -4,12 +4,14 @@ import Styles from './signup-styles.scss'
 import { LoginHeader, Footer, FormStatus, Input } from '@/presentation/components'
 import { Context } from '@/presentation/contexts/form/formContext'
 import { Validation } from '@/presentation/protocols/validation'
+import { AddAccount } from '@/domains/usecases'
 
 type Props = {
   validation: Validation
+  addAccount: AddAccount
 }
 
-const Signup: FC<Props> = ({ validation }) => {
+const Signup: FC<Props> = ({ validation, addAccount }) => {
   const [state, setState] = useState({
     isLoading: false,
     errorMessage: '',
@@ -36,6 +38,12 @@ const Signup: FC<Props> = ({ validation }) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     setState({ ...state, isLoading: true })
+    await addAccount.add({
+      name: state.name,
+      email: state.email,
+      password: state.password,
+      passwordConfirmation: state.passwordConfimation
+    })
   }
 
   const isDisabledButton = (): boolean => !!state.nameError || !!state.emailError || !!state.passwordError || !!state.passwordConfimationError
