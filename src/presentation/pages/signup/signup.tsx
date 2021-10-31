@@ -27,9 +27,10 @@ const Signup: FC<Props> = ({ validation }) => {
       ...state,
       nameError: validation.validate('name', state.name),
       emailError: validation.validate('email', state.email),
-      passwordError: validation.validate('password', state.password)
+      passwordError: validation.validate('password', state.password),
+      passwordConfimationError: validation.validate('passwordConfimation', state.passwordConfimation)
     })
-  }, [state.name, state.email])
+  }, [state.name, state.email, state.password, state.passwordConfimation])
 
   const isDisabledButtom = (): boolean => !state.nameError && !state.emailError && !state.passwordConfimationError && !state.passwordError
 
