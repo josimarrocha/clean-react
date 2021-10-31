@@ -96,4 +96,13 @@ describe('Signup component', () => {
     Helper.populateField(sut, 'passwordConfimation')
     Helper.testStatusForField(sut, 'passwordConfimation')
   })
+
+  test('Should enable submit button if form is valid', () => {
+    const { sut } = makeSut()
+    Helper.populateField(sut, 'name')
+    Helper.populateField(sut, 'email')
+    Helper.populateField(sut, 'password')
+    Helper.populateField(sut, 'passwordConfimation')
+    Helper.testButtonisDisabled(sut, 'submit', false)
+  })
 })
