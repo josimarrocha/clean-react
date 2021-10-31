@@ -72,7 +72,7 @@ const Signup: FC<Props> = ({ validation, addAccount, saveAccessToken }) => {
           <Input type="password" name="password" placeholder="Digite sua senha" />
           <Input type="password" name="passwordConfimation" placeholder="Repita sua senha" />
           <button data-testid="submit" disabled={isDisabledButton()} className={Styles.submit} type="submit">Criar</button>
-          <Link to="/login" className={Styles.link}>voltar para o login</Link>
+          <Link data-testid="login-link" replace to="/login" className={Styles.link}>voltar para o login</Link>
           <FormStatus />
         </form>
       </Context.Provider>
