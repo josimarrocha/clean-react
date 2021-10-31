@@ -32,8 +32,6 @@ const Signup: FC<Props> = ({ validation }) => {
     })
   }, [state.name, state.email, state.password, state.passwordConfimation])
 
-  const isDisabledButtom = (): boolean => !state.nameError && !state.emailError && !state.passwordConfimationError && !state.passwordError
-
   return (
     <div className={Styles.signup}>
       <LoginHeader />
@@ -44,7 +42,7 @@ const Signup: FC<Props> = ({ validation }) => {
           <Input type="email" name="email" placeholder="Digite seu e-mail" />
           <Input type="password" name="password" placeholder="Digite sua senha" />
           <Input type="password" name="passwordConfimation" placeholder="Repita sua senha" />
-          <button data-testid="submit" disabled={isDisabledButtom()} className={Styles.submit} type="submit">Criar</button>
+          <button data-testid="submit" disabled className={Styles.submit} type="submit">Criar</button>
           <Link to="/login" className={Styles.link}>voltar para o login</Link>
           <FormStatus />
         </form>

@@ -40,9 +40,9 @@ const testStatusForField = (sut: RenderResult, fieldName: string, validationErro
   expect(fieldStatus.classList.contains(validationError ? 'error' : 'success')).toBeTruthy()
 }
 
-const testErrorWrapChildCount = (sut: RenderResult, count: number): void => {
-  const errorWrap = sut.getByTestId('error-wrap')
-  expect(errorWrap.childElementCount).toBe(count)
+const testChildCount = (sut: RenderResult, fieldName: string, count: number): void => {
+  const el = sut.getByTestId(fieldName)
+  expect(el.childElementCount).toBe(count)
 }
 
 const testButtonisDisabled = (sut: RenderResult, fieldName: string, isDisabled: boolean): void => {
@@ -54,15 +54,16 @@ describe('Signup component', () => {
   afterEach(cleanup)
 
   test('Should start with initial state', () => {
-    const { sut } = makeSut()
+    const validationError = faker.database.column()
+    const { sut } = makeSut({ validationError })
 
-    testErrorWrapChildCount(sut, 0)
+    testChildCount(sut, 'error-wrap', 0)
     testButtonisDisabled(sut, 'submit', true)
 
-    testStatusForField(sut, 'name')
-    testStatusForField(sut, 'email')
-    testStatusForField(sut, 'password')
-    testStatusForField(sut, 'passwordConfimation')
+    testStatusForField(sut, 'name', validationError)
+    testStatusForField(sut, 'email', validationError)
+    testStatusForField(sut, 'password', validationError)
+    testStatusForField(sut, 'passwordConfimation', validationError)
   })
 
   test('Should show name error if Validation fails', () => {
