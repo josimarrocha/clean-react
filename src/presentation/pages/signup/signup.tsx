@@ -11,6 +11,7 @@ type Props = {
 
 const Signup: FC<Props> = ({ validation }) => {
   const [state, setState] = useState({
+    isLoading: false,
     errorMessage: '',
     name: '',
     email: '',
@@ -32,13 +33,18 @@ const Signup: FC<Props> = ({ validation }) => {
     })
   }, [state.name, state.email, state.password, state.passwordConfimation])
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault()
+    setState({ ...state, isLoading: true })
+  }
+
   const isDisabledButton = (): boolean => !!state.nameError || !!state.emailError || !!state.passwordError || !!state.passwordConfimationError
 
   return (
     <div className={Styles.signup}>
       <LoginHeader />
       <Context.Provider value={{ state, setState }}>
-        <form className={Styles.form} autoComplete="off">
+        <form data-testid="form" className={Styles.form} autoComplete="off" onSubmit={handleSubmit}>
           <h2>Cria Conta</h2>
           <Input type="text" name="name" placeholder="Digite seu nome" />
           <Input type="email" name="email" placeholder="Digite seu e-mail" />
