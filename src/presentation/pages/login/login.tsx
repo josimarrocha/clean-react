@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import Styles from './login-styles.scss'
-import { LoginHeader, Footer, FormStatus, Input } from '@/presentation/components'
+import { LoginHeader, Footer, FormStatus, Input, SubmitButton } from '@/presentation/components'
 import { Context } from '@/presentation/contexts/form/formContext'
 import { Validation } from '@/presentation/protocols/validation'
 import { Authentication, SaveAccessToken } from '@/domains/usecases'
@@ -52,6 +52,8 @@ const Login: FC<Props> = ({ validation, authentication, saveAccessToken }: Props
     }
   }
 
+  const isDisabledButton = (): boolean => !!state.emailError || !!state.passwordError
+
   return (
     <div className={Styles.login}>
       <LoginHeader />
@@ -60,7 +62,7 @@ const Login: FC<Props> = ({ validation, authentication, saveAccessToken }: Props
           <h2>Login</h2>
           <Input type="email" name="email" placeholder="Digite seu e-mail" />
           <Input type="password" name="password" placeholder="Digite sua senha" />
-          <button data-testid="submit" disabled={!!state.emailError || !!state.passwordError} className={Styles.submit} type="submit">Entrar</button>
+          <SubmitButton text="Entrar" disabled={isDisabledButton()} />
           <Link data-testid="signup-link" to="/signup" className={Styles.link}>Criar conta</Link>
           <FormStatus />
         </form>
