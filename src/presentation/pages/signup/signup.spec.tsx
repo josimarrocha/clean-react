@@ -93,4 +93,10 @@ describe('Signup component', () => {
     populateField(sut, 'passwordConfimation')
     testStatusForField(sut, 'passwordConfimation', validationError)
   })
+
+  test('Should show valid name state if Validation succeeds', () => {
+    const { sut } = makeSut()
+    populateField(sut, 'name')
+    testStatusForField(sut, 'name')
+  })
 })
