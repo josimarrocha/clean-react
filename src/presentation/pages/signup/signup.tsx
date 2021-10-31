@@ -26,7 +26,8 @@ const Signup: FC<Props> = ({ validation }) => {
     setState({
       ...state,
       nameError: validation.validate('name', state.name),
-      emailError: validation.validate('email', state.email)
+      emailError: validation.validate('email', state.email),
+      passwordError: validation.validate('password', state.password)
     })
   }, [state.name, state.email])
 
