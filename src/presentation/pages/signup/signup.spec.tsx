@@ -85,4 +85,11 @@ describe('Signup component', () => {
     populateNameField(sut)
     testStatusForField(sut, 'password', validationError)
   })
+
+  test('Should show passwordConfimation error if Validation fails', () => {
+    const validationError = faker.random.words()
+    const { sut } = makeSut({ validationError })
+    populateNameField(sut)
+    testStatusForField(sut, 'passwordConfimation', validationError)
+  })
 })
