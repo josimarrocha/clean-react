@@ -147,14 +147,14 @@ describe('Signup component', () => {
     expect(addAccountSpy.callsCont).toBe(1)
   })
 
-  test('Should not call Authentication if form is invalid', () => {
+  test('Should not call AddAccount if form is invalid', () => {
     const validationError = faker.random.words()
     const { sut, addAccountSpy } = makeSut({ validationError })
     fireEvent.submit(sut.getByTestId('form'))
     expect(addAccountSpy.callsCont).toBe(0)
   })
 
-  test('Should present error if Authentication fails', async () => {
+  test('Should present error if AddAccount fails', async () => {
     const { sut, addAccountSpy } = makeSut()
     const error = new EmailInUseError()
     jest.spyOn(addAccountSpy, 'add').mockRejectedValueOnce(error)
