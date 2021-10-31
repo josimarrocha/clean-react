@@ -29,9 +29,9 @@ const makeSut = (params?: SutParams): SutTypes => {
   }
 }
 
-const populateNameField = (sut: RenderResult, name: string = faker.internet.email()): void => {
-  const emailInput = sut.getByTestId('name')
-  fireEvent.change(emailInput, { target: { value: name } })
+const populateField = (sut: RenderResult, fieldName: string, value: string = faker.internet.email()): void => {
+  const input = sut.getByTestId(fieldName)
+  fireEvent.change(input, { target: { value } })
 }
 
 const testStatusForField = (sut: RenderResult, fieldName: string, validationError?: string): void => {
@@ -69,28 +69,28 @@ describe('Signup component', () => {
   test('Should show name error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
-    populateNameField(sut)
+    populateField(sut, 'name')
     testStatusForField(sut, 'name', validationError)
   })
 
   test('Should show email error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
-    populateNameField(sut)
+    populateField(sut, 'email')
     testStatusForField(sut, 'email', validationError)
   })
 
   test('Should show password error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
-    populateNameField(sut)
+    populateField(sut, 'password')
     testStatusForField(sut, 'password', validationError)
   })
 
   test('Should show passwordConfimation error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
-    populateNameField(sut)
+    populateField(sut, 'passwordConfimation')
     testStatusForField(sut, 'passwordConfimation', validationError)
   })
 })
