@@ -25,8 +25,8 @@ export class ValidationBuilder {
     return this
   }
 
-  compare(valueToCampare: string): ValidationBuilder {
-    this.validations.push(new CompareFieldsValidation(this.fieldName, valueToCampare))
+  compare(fieldToCampare: string): ValidationBuilder {
+    this.validations.push(new CompareFieldsValidation(this.fieldName, fieldToCampare))
     return this
   }
 

@@ -48,7 +48,7 @@ const simulateValidSubmit = async (
   Helper.populateField(sut, 'name', name)
   Helper.populateField(sut, 'email', email)
   Helper.populateField(sut, 'password', password)
-  Helper.populateField(sut, 'passwordConfimation', password)
+  Helper.populateField(sut, 'passwordConfirmation', password)
   const form = sut.getByTestId('form')
   fireEvent.submit(form)
   await waitFor(() => form)
@@ -67,7 +67,7 @@ describe('Signup component', () => {
     Helper.testStatusForField(sut, 'name', validationError)
     Helper.testStatusForField(sut, 'email', validationError)
     Helper.testStatusForField(sut, 'password', validationError)
-    Helper.testStatusForField(sut, 'passwordConfimation', validationError)
+    Helper.testStatusForField(sut, 'passwordConfirmation', validationError)
   })
 
   test('Should show name error if Validation fails', () => {
@@ -91,11 +91,11 @@ describe('Signup component', () => {
     Helper.testStatusForField(sut, 'password', validationError)
   })
 
-  test('Should show passwordConfimation error if Validation fails', () => {
+  test('Should show passwordConfirmation error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
-    Helper.populateField(sut, 'passwordConfimation')
-    Helper.testStatusForField(sut, 'passwordConfimation', validationError)
+    Helper.populateField(sut, 'passwordConfirmation')
+    Helper.testStatusForField(sut, 'passwordConfirmation', validationError)
   })
 
   test('Should show valid name state if Validation succeeds', () => {
@@ -116,10 +116,10 @@ describe('Signup component', () => {
     Helper.testStatusForField(sut, 'password')
   })
 
-  test('Should show valid passwordConfimation state if Validation succeeds', () => {
+  test('Should show valid passwordConfirmation state if Validation succeeds', () => {
     const { sut } = makeSut()
-    Helper.populateField(sut, 'passwordConfimation')
-    Helper.testStatusForField(sut, 'passwordConfimation')
+    Helper.populateField(sut, 'passwordConfirmation')
+    Helper.testStatusForField(sut, 'passwordConfirmation')
   })
 
   test('Should enable submit button if form is valid', () => {
@@ -127,7 +127,7 @@ describe('Signup component', () => {
     Helper.populateField(sut, 'name')
     Helper.populateField(sut, 'email')
     Helper.populateField(sut, 'password')
-    Helper.populateField(sut, 'passwordConfimation')
+    Helper.populateField(sut, 'passwordConfirmation')
     Helper.testButtonisDisabled(sut, 'submit', false)
   })
 

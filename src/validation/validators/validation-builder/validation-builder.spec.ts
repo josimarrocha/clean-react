@@ -33,11 +33,11 @@ describe('ValidationBuilder', () => {
 
   test('Should returns CompareFieldsValidation', () => {
     const fieldName = faker.database.column()
-    const fieldValue = faker.random.word()
-    const validations = sut.field(fieldName).compare(fieldValue).build()
+    const fieldToCompare = faker.random.word()
+    const validations = sut.field(fieldName).compare(fieldToCompare).build()
 
     expect(validations).toEqual([
-      new CompareFieldsValidation(fieldName, fieldValue)
+      new CompareFieldsValidation(fieldName, fieldToCompare)
     ])
   })
 

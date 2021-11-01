@@ -20,22 +20,24 @@ const Signup: FC<Props> = ({ validation, addAccount, saveAccessToken }) => {
     name: '',
     email: '',
     password: '',
-    passwordConfimation: '',
+    passwordConfirmation: '',
     nameError: '',
     emailError: '',
     passwordError: '',
-    passwordConfimationError: ''
+    passwordConfirmationError: ''
   })
 
   useEffect(() => {
+    const { name, email, password, passwordConfirmation } = state
+    const formData = { name, email, password, passwordConfirmation }
     setState({
       ...state,
-      nameError: validation.validate('name', state.name),
-      emailError: validation.validate('email', state.email),
-      passwordError: validation.validate('password', state.password),
-      passwordConfimationError: validation.validate('passwordConfimation', state.passwordConfimation)
+      nameError: validation.validate('name', formData),
+      emailError: validation.validate('email', formData),
+      passwordError: validation.validate('password', formData),
+      passwordConfirmationError: validation.validate('passwordConfirmation', formData)
     })
-  }, [state.name, state.email, state.password, state.passwordConfimation])
+  }, [state.name, state.email, state.password, state.passwordConfirmation])
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
@@ -46,7 +48,7 @@ const Signup: FC<Props> = ({ validation, addAccount, saveAccessToken }) => {
         name: state.name,
         email: state.email,
         password: state.password,
-        passwordConfirmation: state.passwordConfimation
+        passwordConfirmation: state.passwordConfirmation
       })
       await saveAccessToken.save(account.accessToken)
       history.replace('/')
@@ -59,7 +61,7 @@ const Signup: FC<Props> = ({ validation, addAccount, saveAccessToken }) => {
     }
   }
 
-  const isDisabledButton = (): boolean => !!state.nameError || !!state.emailError || !!state.passwordError || !!state.passwordConfimationError
+  const isDisabledButton = (): boolean => !!state.nameError || !!state.emailError || !!state.passwordError || !!state.passwordConfirmationError
 
   return (
     <div className={Styles.signup}>
@@ -70,7 +72,7 @@ const Signup: FC<Props> = ({ validation, addAccount, saveAccessToken }) => {
           <Input type="text" name="name" placeholder="Digite seu nome" />
           <Input type="email" name="email" placeholder="Digite seu e-mail" />
           <Input type="password" name="password" placeholder="Digite sua senha" />
-          <Input type="password" name="passwordConfimation" placeholder="Repita sua senha" />
+          <Input type="password" name="passwordConfirmation" placeholder="Repita sua senha" />
           <SubmitButton text="Criar" disabled={isDisabledButton()} />
           <Link data-testid="login-link" replace to="/login" className={Styles.link}>voltar para o login</Link>
           <FormStatus />
