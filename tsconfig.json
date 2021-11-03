@@ -17,5 +17,5 @@
     }
   },
   "include": ["src"],
-  "exclude": ["node_modules", ".husky", ".vscode"]
+  "exclude": ["node_modules", ".husky", ".vscode", "src/main/test/cypress"]
 }

@@ -7,6 +7,10 @@ module.exports = {
     '!<rootDir>/src/**/index.ts',
     '!**/*.d.ts'
   ],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules',
+    '<rootDir>/src/main/test/cypress'
+  ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
 
