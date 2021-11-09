@@ -40,11 +40,27 @@ describe('Login', () => {
       cy.getByTestId('password').type(faker.random.alphaNumeric(6))
       cy.root().submit().then(() => {
         cy.getByTestId('error-wrap')
+          .getByTestId('spinner').should('exist')
+          .getByTestId('main-error').should('not.exist')
           .getByTestId('spinner').should('not.exist')
-          .getByTestId('main-error').should('exist')
-          .getByTestId('main-error').should('contain.text', 'Algo de errado aconteceu. Tente novamente em breve.')
+          .getByTestId('main-error').should('contain.text', 'Credenciais inválidas')
       })
     })
     cy.url().should('eq', `${baseUrl}/login`)
+  })
+
+  it('Should present save accessToken if valid credentials are provided', () => {
+    cy.getByTestId('form').within(() => {
+      cy.getByTestId('email').type('mango@gmail.com')
+      cy.getByTestId('password').type('12345')
+      cy.root().submit().then(() => {
+        cy.getByTestId('error-wrap')
+          .getByTestId('spinner').should('exist')
+          .getByTestId('main-error').should('not.exist')
+          .getByTestId('spinner').should('not.exist')
+      })
+    })
+    cy.url().should('eq', `${baseUrl}/`)
+    cy.window().then(window => assert.isOk(window.localStorage.getItem('accessToken')))
   })
 })
