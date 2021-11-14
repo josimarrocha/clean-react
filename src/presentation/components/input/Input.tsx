@@ -15,17 +15,23 @@ const Input: FC<Props> = (props: Props) => {
     return state[`${props.name}Error`] ? Styles.error : Styles.success
   }
 
-  const handleChange = (event: FocusEvent<HTMLInputElement>): void => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.value
-    })
+  const handleChange = (e: FocusEvent<HTMLInputElement>): void => {
+    setState({ ...state, [e.target.name]: e.target.value })
   }
 
   return (
     <div className={Styles.inputWrap}>
       <input {...props} hidden />
-      <input data-testid={props.name} {...props} onChange={handleChange} />
+      <input
+        {...props}
+        placeholder=" "
+        id={props.name}
+        data-testid={props.name}
+        onChange={handleChange}
+      />
+      <label htmlFor={props.name}>
+        {props.placeholder}
+      </label>
       <span
         title={getTitle()}
         data-testid={`${props.name}-status`}
