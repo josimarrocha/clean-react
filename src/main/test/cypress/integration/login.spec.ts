@@ -55,6 +55,27 @@ describe('Login', () => {
     cy.url().should('eq', `${baseUrl}/login`)
   })
 
+  it('Should present UnexpectedError on 400', () => {
+    cy.intercept({
+      method: 'POST',
+      url: /login/
+    }, {
+      statusCode: 400,
+      body: {
+        error: faker.random.words()
+      }
+    })
+    cy.getByTestId('form').within(($) => {
+      cy.getByTestId('email').type(faker.internet.email())
+      cy.getByTestId('password').type(faker.random.alphaNumeric(6))
+      cy.root().submit().then(() => {
+        cy.getByTestId('spinner').should('not.exist')
+          .getByTestId('main-error').should('contain.text', 'Algo de errado aconteceu. Tente novamente em breve.')
+      })
+    })
+    cy.url().should('eq', `${baseUrl}/login`)
+  })
+
   it('Should present UnexpectedError if invalid data is returned', () => {
     const accessToken = faker.datatype.uuid()
     cy.intercept({
