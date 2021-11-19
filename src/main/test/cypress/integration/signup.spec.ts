@@ -66,4 +66,13 @@ describe('Signup', () => {
     })
     FormHelper.testUrl('/signup')
   })
+
+  it('Should present UnexpectedError on 400', () => {
+    Http.mockUnexpectedError()
+    cy.getByTestId('form').within(($) => {
+      smulateValidSubmit()
+      FormHelper.testErrorStatus('Algo de errado aconteceu. Tente novamente em breve.')
+    })
+    FormHelper.testUrl('/signup')
+  })
 })
