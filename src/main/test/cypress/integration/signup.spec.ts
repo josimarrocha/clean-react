@@ -75,4 +75,13 @@ describe('Signup', () => {
     })
     FormHelper.testUrl('/signup')
   })
+
+  it('Should present UnexpectedError if invalid data is returned', () => {
+    Http.mockDataInvalid()
+    cy.getByTestId('form').within(($) => {
+      smulateValidSubmit()
+      FormHelper.testErrorStatus('Algo de errado aconteceu. Tente novamente em breve.')
+    })
+    FormHelper.testUrl('/signup')
+  })
 })
