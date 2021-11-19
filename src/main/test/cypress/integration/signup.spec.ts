@@ -2,12 +2,15 @@ import faker from 'faker'
 import * as Http from '../support/signup-mocks'
 import * as FormHelper from '../support/form-helper'
 
-const smulateValidSubmit = (): void => {
+const populateFields = (): void => {
   const password = faker.random.alphaNumeric(6)
   cy.getByTestId('name').type(faker.name.findName())
   cy.getByTestId('email').type(faker.internet.email())
   cy.getByTestId('password').type(password)
   cy.getByTestId('passwordConfirmation').type(password)
+}
+const smulateValidSubmit = (): void => {
+  populateFields()
   cy.getByTestId('submit').click()
 }
 
@@ -94,5 +97,12 @@ describe('Signup', () => {
     })
     FormHelper.testUrl('/')
     FormHelper.testLocalStorageItem('accessToken')
+  })
+
+  it('Should prevent multiple submits', () => {
+    Http.mockOk()
+    populateFields()
+    cy.getByTestId('submit').dblclick()
+    cy.get('@request.all').should('have.length', 1)
   })
 })
